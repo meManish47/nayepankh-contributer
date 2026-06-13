@@ -55,6 +55,7 @@ function App() {
         <OnboardingFlow 
           data={applicantData} 
           onComplete={handleOnboardingComplete} 
+          onBack={() => setView("landing")}
         />
       )}
       

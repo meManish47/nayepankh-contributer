@@ -16,10 +16,12 @@ const TOTAL_STEPS = 6
 
 export default function OnboardingFlow({ 
   data, 
-  onComplete 
+  onComplete,
+  onBack
 }: { 
   data: ApplicantData, 
-  onComplete: (data: ApplicantData) => void 
+  onComplete: (data: ApplicantData) => void,
+  onBack: () => void
 }) {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState<ApplicantData>(data)
@@ -39,6 +41,8 @@ export default function OnboardingFlow({
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(prev => prev - 1)
+    } else {
+      onBack()
     }
   }
 
@@ -48,7 +52,7 @@ export default function OnboardingFlow({
     <div className="min-h-screen flex flex-col bg-slate-50">
       <header className="px-6 py-4 border-b bg-white flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={handleBack} disabled={currentStep === 1}>
+          <Button variant="ghost" size="icon" onClick={handleBack}>
             <ChevronLeft className="w-5 h-5" />
           </Button>
           <div>
